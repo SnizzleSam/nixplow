@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  shovel_user_id: 1
+  owner_user_id: 1
+  start_date: 2016-01-03 22:37:56
+  owner_confirmation: false
+
+two:
+  shovel_user_id: 1
+  owner_user_id: 1
+  start_date: 2016-01-03 22:37:56
+  owner_confirmation: false

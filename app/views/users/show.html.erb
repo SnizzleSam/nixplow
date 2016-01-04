@@ -1,0 +1,55 @@
+<h3><%= @user.username %></h3>
+<p><%= @user.address%></p>
+<p><%= @user.description%></p>
+<% if @user.type == "ShovelUser" %>
+    <p>$<%= @user.price%></p>
+<% end %>
+
+
+<% if @nearby.any? %>
+Shovelers neaby <br/>
+<ul>
+    <% @nearby.each do |n| %>
+      <% if n.type == "ShovelUser" %>
+        <li><%= link_to n.username, n %> charges $<%= n.price %>/hour</li>
+      <% end %>
+    <% end %>
+</ul>
+<% end %>
+<% if @user == current_user && @user.shovel_jobs.any? %>
+<h3>The following people said they will shovel your driveway</h3>
+  <% @user.shovel_jobs.each do |s| %>
+    <% shovel_user = User.find_by(id: s.shovel_user_id) %>
+    <h4><%= shovel_user.username %> for $<%= shovel_user.price %>/hour</h4>
+  <% end %>
+<% end %>
+
+<div id="map" width="100%"></div>
+
+<script type="text/javascript">
+  
+  function initMap() {
+  // Create a map object and specify the DOM element for display.
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: <%=@user.latitude%>, lng: <%=@user.longitude%>},
+    scrollwheel: false,
+    zoom: 8
+  });
+  
+    var position;
+     
+      position = {lat: <%= @user.latitude %>, lng: <%= @user.longitude %>};
+      
+      var marker = new google.maps.Marker({
+        map: map,
+        position: position,
+        
+        label: "<%= @user.username %>"
+        
+      })
+   
+}
+  </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCOmXloda4ZXb3h1IaLctndcThHVe6v1Lk&callback=initMap"
+  type="text/javascript"></script>

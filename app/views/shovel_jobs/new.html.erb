@@ -1,0 +1,16 @@
+<%= form_for @owner_user_shovel_job, url:owner_user_jobs_new_path  do |f| %>
+    <% if @owner_user_shovel_job.errors.any? %>
+        <% @owner_user_shovel_job.errors.full_messages.each do |m|%>
+            <h3><%= m %></h3>
+        <% end %>
+    <% end %>
+    <table>
+        <tr>
+            <td><%= f.label "When are you going to start shoveling?" %></td>
+            <td><%= f.datetime_select :start_date%></td>
+        </tr>
+        <tr>
+            <td><%= f.submit "Get Shoveling!" %></td>
+        </tr>
+    </table>
+<% end %>
